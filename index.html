@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Khutti Ma Jutti - Discount Calculator</title>
+  <style>
+    body {
+      background: #fff4e6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(150, 100, 30, 0.15);
+      color: #3e2f1c;
+    }
+
+    .brand-name {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: #b3472a;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 22px;
+      color: #5c3d1a;
+    }
+
+    .offer-title {
+      background-color: #b3472a;
+      color: #fff4e6;
+      padding: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 10px rgba(179, 71, 42, 0.4);
+    }
+
+    .offer-message {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      color: #4a2b10;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 20px;
+      color: #5c3d1a;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #d9bba6;
+      border-radius: 10px;
+      color: #3e2f1c;
+      margin-bottom: 15px;
+    }
+
+    input:focus {
+      border-color: #b3472a;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      background-color: #b3472a;
+      color: #fff4e6;
+      border: none;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 12px;
+      margin-top: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(179, 71, 42, 0.6);
+    }
+
+    button:hover {
+      background-color: #8c2f1b;
+    }
+
+    #result {
+      margin-top: 25px;
+      background: #f4e4d8;
+      padding: 18px;
+      border-left: 6px solid #b3472a;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      color: #4a3520;
+      min-height: 90px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brand-name">Khutti Ma Jutti</div>
+
+  <h2>Order Discount Calculator</h2>
+
+  <p class="offer-title">🎉 Offer! Offer! Offer! 🎉</p>
+  <p class="offer-message">
+    Buy 3 or more pairs of juttis and get <span style="text-decoration: underline;">10% discount</span>!
+  </p>
+
+  <label for="pricePerPiece">Price per Jutti:</label>
+  <input type="text" id="pricePerPiece" value="Rs 1350" readonly />
+
+  <label for="quantity">Enter number of juttis you want to buy:</label>
+  <input type="number" id="quantity" min="1" placeholder="Type quantity here" />
+
+  <button onclick="calculatePrice()">Check Price</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculatePrice() {
+      let quantity = parseInt(document.getElementById("quantity").value);
+      if (!quantity || quantity < 1) {
+        document.getElementById("result").innerHTML = "Please enter a valid quantity.";
+        return;
+      }
+
+      const pricePerPair = 1350;
+      const totalPrice = quantity * pricePerPair;
+
+      let discount = 0;
+      if (quantity >= 3) {
+        discount = totalPrice * 0.10;
+      }
+
+      const finalPrice = totalPrice - discount;
+
+      const format = (num) => num.toLocaleString('en-IN');
+
+      document.getElementById("result").innerHTML =
+        `Total Price: Rs ${format(totalPrice)}<br>
+         Discount: Rs ${format(discount)}<br>
+         <strong>Final Price to Pay: Rs ${format(finalPrice)}</strong>`;
+    }
+  </script>
+
+</body>
+</html>
