@@ -1,147 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Khutti Ma Jutti - Discount Calculator</title>
-  <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      background: #fff4e6;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      max-width: 450px;
-      margin: 40px auto;
-      padding: 30px 25px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(150, 100, 30, 0.15);
-      color: #3e2f1c;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap');
 
-    h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-weight: 800;
-      font-size: 26px;
-      color: #b3472a; /* Warm deep red */
-      letter-spacing: 1.2px;
-    }
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  background: #fffaf0; /* soft cream */
+  color: #4a3c31; /* warm brown */
+}
 
-    .offer {
-      background: #b3472a;
-      color: #fff4e6;
-      font-weight: 700;
-      padding: 16px;
-      text-align: center;
-      border-radius: 10px;
-      margin-bottom: 30px;
-      font-size: 18px;
-      box-shadow: 0 3px 10px rgba(179, 71, 42, 0.5);
-      letter-spacing: 0.7px;
-    }
+header {
+  background: linear-gradient(135deg, #d9a5b3, #b5838d);
+  padding: 25px 20px;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px;
+  color: #fff0f5;
+  letter-spacing: 2px;
+  box-shadow: 0 3px 10px rgba(181, 131, 141, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    label {
-      font-weight: 600;
-      font-size: 15px;
-      display: block;
-      margin-bottom: 8px;
-      margin-top: 20px;
-      color: #5c3d1a;
-    }
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: absolute;
+  top: 28px;
+  right: 20px;
+  width: 30px;
+  height: 25px;
+  justify-content: space-between;
+  z-index: 1100;
+}
 
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 12px 15px;
-      font-size: 16px;
-      border: 2px solid #d9bba6;
-      border-radius: 10px;
-      color: #3e2f1c;
-      transition: border-color 0.25s ease;
-    }
-    input[type="text"]:focus,
-    input[type="number"]:focus {
-      border-color: #b3472a;
-      outline: none;
-    }
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  background: #fff0f5;
+  border-radius: 2px;
+}
 
-    button {
-      width: 100%;
-      background-color: #b3472a;
-      color: #fff4e6;
-      border: none;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: 700;
-      border-radius: 12px;
-      margin-top: 30px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 12px rgba(179, 71, 42, 0.6);
-    }
-    button:hover {
-      background-color: #8c2f1b;
-    }
+nav {
+  background: #f5e6e8;
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+  border-top: 2px solid #d9a5b3;
+  border-bottom: 2px solid #d9a5b3;
+  box-shadow: 0 2px 8px rgba(181, 131, 141, 0.2);
+}
 
-    #result {
-      margin-top: 30px;
-      background: #f4e4d8;
-      padding: 20px;
-      border-left: 6px solid #b3472a;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 18px;
-      color: #4a3520;
-      min-height: 90px;
-    }
-  </style>
-</head>
-<body>
+nav a {
+  color: #b5838d;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 15px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
 
-  <h2>Khutti Ma Jutti - Order Discount Calculator</h2>
+nav a:hover {
+  background-color: #d9a5b3;
+  color: #fff0f5;
+}
 
-  <div class="offer">
-    🎉 Offer Offer Offer: Buy 3 or more pairs of juttis and get <u>10% OFF</u>! 🎉
-  </div>
+main {
+  padding: 30px 20px;
+  text-align: center;
+}
 
-  <label for="pricePerPiece">Price per Jutti (per piece):</label>
-  <input type="text" id="pricePerPiece" value="रु1350" readonly />
+main h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 34px;
+  color: #b5838d;
+  margin-bottom: 10px;
+}
 
-  <label for="quantity">Enter number of juttis you want to buy:</label>
-  <input type="number" id="quantity" min="1" placeholder="Type quantity here" />
+main p {
+  font-size: 18px;
+  max-width: 400px;
+  margin: 0 auto 25px auto;
+  color: #6a4a3c;
+  line-height: 1.5;
+}
 
-  <button onclick="calculatePrice()">Check Price</button>
+button#orderBtn {
+  background: linear-gradient(45deg, #d9a5b3, #b5838d);
+  color: #fff0f5;
+  border: none;
+  border-radius: 30px;
+  padding: 15px 45px;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(181, 131, 141, 0.5);
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+}
 
-  <div id="result"></div>
+button#orderBtn:hover {
+  background: linear-gradient(45deg, #b5838d, #d9a5b3);
+  transform: scale(1.05);
+}
 
-  <script>
-    function calculatePrice() {
-      let quantity = parseInt(document.getElementById("quantity").value);
-      if (!quantity || quantity < 1) {
-        document.getElementById("result").innerHTML = "Please enter a valid quantity (1 or more).";
-        return;
-      }
+#message {
+  margin-top: 22px;
+  font-size: 20px;
+  color: #7a4f56;
+  font-style: italic;
+}
 
-      const pricePerPair = 1350;
-      const totalPrice = quantity * pricePerPair;
-
-      let discount = 0;
-      if (quantity >= 3) {
-        discount = totalPrice * 0.10;
-      }
-
-      const finalPrice = totalPrice - discount;
-
-      const format = (num) => num.toLocaleString('en-IN');
-
-      document.getElementById("result").innerHTML =
-        `Total Price: Rs${format(totalPrice)}<br>
-         Discount: Rs${format(discount)}<br>
-         <strong>Final Price to Pay: Rs${format(finalPrice)}</strong>`;
-    }
-  </script>
-
-</body>
-</html>
+/* Responsive menu styles */
+@media (max-width: 600px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    background: #f5e6e8;
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    left: 0;
+    border-top: none;
+    border-bottom: none;
+    box-shadow: 0 4px 10px rgba(181, 131, 141, 0.2);
+  }
+  nav.show {
+    display: flex;
+  }
+  nav a {
+    margin: 12px 0;
+    font-size: 22px;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+}

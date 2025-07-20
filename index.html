@@ -3,158 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Khutti Ma Jutti - Discount Calculator</title>
+  <title>Khutti Ma Jutti</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
-      background: #fff4e6;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      max-width: 500px;
-      margin: 40px auto;
-      padding: 30px 25px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(150, 100, 30, 0.15);
-      color: #3e2f1c;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fdf6f0;
+      color: #4b2e1e;
+      padding-bottom: 60px; /* space for bottom nav */
     }
 
-    .brand-name {
+    header {
+      background-color: #8b5e3c;
+      padding: 15px 20px;
       text-align: center;
-      font-size: 32px;
-      font-weight: 900;
-      color: #b3472a;
+      position: sticky;
+      top: 0;
+      z-index: 100;
       margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
     }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 700;
-      font-size: 22px;
-      color: #5c3d1a;
-    }
-
-    .offer-title {
-      background-color: #b3472a;
-      color: #fff4e6;
-      padding: 12px;
-      font-size: 20px;
+    header h1 {
+      margin: 0;
+      font-size: 24px;
       font-weight: bold;
-      text-align: center;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      box-shadow: 0 4px 10px rgba(179, 71, 42, 0.4);
+      color: white;
+      letter-spacing: 1px;
     }
 
-    .offer-message {
-      font-size: 18px;
-      font-weight: 600;
-      text-align: center;
-      color: #4a2b10;
-      margin-bottom: 30px;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 8px;
-      margin-top: 20px;
-      color: #5c3d1a;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 12px;
+    .offer {
+      background: #8b5e3c;
+      color: white;
+      padding: 10px;
       font-size: 16px;
-      border: 2px solid #d9bba6;
-      border-radius: 10px;
-      color: #3e2f1c;
-      margin-bottom: 15px;
+      font-weight: bold;
+      animation: blink 1.5s infinite;
+      text-align: center;
+    }
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.5; }
     }
 
-    input:focus {
-      border-color: #b3472a;
-      outline: none;
+    section {
+      display: none;
+      padding: 20px;
+      text-align: center;
+    }
+    section.active {
+      display: block;
     }
 
-    button {
+    .products img {
       width: 100%;
-      background-color: #b3472a;
-      color: #fff4e6;
-      border: none;
-      padding: 14px;
-      font-size: 18px;
-      font-weight: 700;
-      border-radius: 12px;
-      margin-top: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(179, 71, 42, 0.6);
-    }
-
-    button:hover {
-      background-color: #8c2f1b;
-    }
-
-    #result {
-      margin-top: 25px;
-      background: #f4e4d8;
-      padding: 18px;
-      border-left: 6px solid #b3472a;
+      max-width: 300px;
       border-radius: 10px;
-      font-weight: 700;
-      font-size: 17px;
-      color: #4a3520;
-      min-height: 90px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    .contact-info {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .btn {
+      background: #4b2e1e;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55px;
+      background: #4b2e1e;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+    nav.bottom-nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      padding: 5px 0;
+      transition: background 0.3s;
+      user-select: none;
+    }
+    nav.bottom-nav a .icon {
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+    nav.bottom-nav a.active,
+    nav.bottom-nav a:hover {
+      background-color: #8b5e3c;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 20px;
+      }
+      .offer {
+        font-size: 14px;
+      }
+      .btn {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="brand-name">Khutti Ma Jutti</div>
+  <div class="offer">🔥 Buy 3 Juttis & Get 10% Off! 🔥</div>
 
-  <h2>Order Discount Calculator</h2>
+  <header>
+    <h1>Khutti Ma Jutti</h1>
+  </header>
 
-  <p class="offer-title">🎉 Offer! Offer! Offer! 🎉</p>
-  <p class="offer-message">
-    Buy 3 or more pairs of juttis and get <span style="text-decoration: underline;">10% discount</span>!
-  </p>
+  <section id="home" class="active">
+    <h2>Welcome to Khutti Ma Jutti</h2>
+    <p>Where tradition meets style. Discover beautiful handcrafted juttis made with love and culture.</p>
+  </section>
 
-  <label for="pricePerPiece">Price per Jutti:</label>
-  <input type="text" id="pricePerPiece" value="Rs 1350" readonly />
+  <section id="products">
+    <h2>Our Products</h2>
+    <div class="products">
+      <img src="https://via.placeholder.com/300x200?text=Jutti+1" alt="Jutti 1" />
+      <img src="https://via.placeholder.com/300x200?text=Jutti+2" alt="Jutti 2" />
+      <img src="https://via.placeholder.com/300x200?text=Jutti+3" alt="Jutti 3" />
+    </div>
+  </section>
 
-  <label for="quantity">Enter number of juttis you want to buy:</label>
-  <input type="number" id="quantity" min="1" placeholder="Type quantity here" />
+  <section id="about">
+    <h2>About Us</h2>
+    <p>
+      At Khutti Ma Jutti, we specialize in traditional Punjabi juttis that celebrate cultural elegance and craftsmanship. Our collection features beautifully handcrafted juttis inspired by classic designs like Jumka and Payal juttis, adorned with intricate hand embroidery. Each pair is thoughtfully made with both comfort and style in mind, offering options with soft cushioned soles as well as durable leather soles. Whether for festive occasions or everyday wear, Khutti Ma Jutti brings you authentic, stylish footwear that honors tradition while keeping your feet happy.
+    </p>
+  </section>
 
-  <button onclick="calculatePrice()">Check Price</button>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p class="contact-info">📞 Call: 9820102815</p>
+    <p class="contact-info">📷 Instagram: @khuttimajutti</p>
+    <button class="btn" id="orderBtn">Place Your Order</button>
+  </section>
 
-  <div id="result"></div>
+  <nav class="bottom-nav">
+    <a href="#" data-section="home" class="active">
+      <div class="icon">🏠</div>
+      Home
+    </a>
+    <a href="#" data-section="products">
+      <div class="icon">🥿</div>
+      Products
+    </a>
+    <a href="#" data-section="about">
+      <div class="icon">ℹ️</div>
+      About
+    </a>
+    <a href="#" data-section="contact">
+      <div class="icon">📞</div>
+      Contact
+    </a>
+  </nav>
 
   <script>
-    function calculatePrice() {
-      let quantity = parseInt(document.getElementById("quantity").value);
-      if (!quantity || quantity < 1) {
-        document.getElementById("result").innerHTML = "Please enter a valid quantity.";
-        return;
-      }
+    $(document).ready(function() {
+      $('nav.bottom-nav a').click(function(e) {
+        e.preventDefault();
+        var target = $(this).data('section');
 
-      const pricePerPair = 1350;
-      const totalPrice = quantity * pricePerPair;
+        $('nav.bottom-nav a').removeClass('active');
+        $(this).addClass('active');
 
-      let discount = 0;
-      if (quantity >= 3) {
-        discount = totalPrice * 0.10;
-      }
+        $('section').removeClass('active');
+        $('#' + target).addClass('active');
+      });
 
-      const finalPrice = totalPrice - discount;
-
-      const format = (num) => num.toLocaleString('en-IN');
-
-      document.getElementById("result").innerHTML =
-        `Total Price: Rs ${format(totalPrice)}<br>
-         Discount: Rs ${format(discount)}<br>
-         <strong>Final Price to Pay: Rs ${format(finalPrice)}</strong>`;
-    }
+      $('#orderBtn').click(function() {
+        alert('Thank you for your interest! We will contact you on WhatsApp soon.');
+      });
+    });
   </script>
 
 </body>
